@@ -1,0 +1,39 @@
+services:
+  auth:
+    image: cosmtrek/air
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      - PORT=${PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - AUTH_DB_HOST=${AUTH_DB_HOST}
+      - AUTH_DB_PORT=${AUTH_DB_PORT}
+      - AUTH_DB_DATABASE=${AUTH_DB_DATABASE}
+      - AUTH_DB_USERNAME=${AUTH_DB_USERNAME}
+      - AUTH_DB_PASSWORD=${AUTH_DB_PASSWORD}
+      - air_wd=/app
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/app
+    depends_on:
+      - psql_auth
+    profiles:
+      - dev
+
+  psql_auth:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${AUTH_DB_DATABASE}
+      POSTGRES_USER: ${AUTH_DB_USERNAME}
+      POSTGRES_PASSWORD: ${AUTH_DB_PASSWORD}
+    ports:
+      - "${AUTH_DB_PORT}:5432"
+    volumes:
+      - psql_volume_auth:/var/lib/postgresql/data
+    profiles:
+      - dev
+
+volumes:
+  psql_volume_auth:
