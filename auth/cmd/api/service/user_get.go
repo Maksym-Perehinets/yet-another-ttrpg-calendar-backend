@@ -1,9 +1,9 @@
 package service
 
 import (
-	"auth/interfaces"
-	"auth/internal/models"
-	"auth/shared/response"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/interfaces"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/shared/response"
 	"log"
 )
 

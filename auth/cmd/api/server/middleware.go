@@ -1,7 +1,7 @@
 package server
 
 import (
-	"auth/internal/jwt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/jwt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"

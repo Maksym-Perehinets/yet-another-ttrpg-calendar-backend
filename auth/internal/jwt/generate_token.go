@@ -1,7 +1,7 @@
 package jwt
 
 import (
-	"auth/internal/models"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
 	"github.com/golang-jwt/jwt/v5"
 	"log"
 	"os"

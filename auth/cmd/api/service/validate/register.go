@@ -1,10 +1,10 @@
 package validate
 
 import (
-	"auth/interfaces"
-	"auth/internal/models"
-	"auth/shared/request"
 	"fmt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/interfaces"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/shared/request"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -12,8 +12,7 @@ import (
 )
 
 var (
-	emailRegex    = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
-	passwordRegex = `^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,64}$`
+	emailRegex = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
 )
 
 type RegisterRequest struct {

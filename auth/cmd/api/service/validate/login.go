@@ -1,11 +1,11 @@
 package validate
 
 import (
-	"auth/interfaces"
-	"auth/internal/jwt"
-	"auth/internal/models"
-	"auth/shared/request"
 	"errors"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/interfaces"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/jwt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/shared/request"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"log"

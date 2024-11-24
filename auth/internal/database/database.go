@@ -1,15 +1,15 @@
 package database
 
 import (
-	"auth/interfaces"
 	"fmt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/interfaces"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
 	"os"
 	"strconv"
 
-	"auth/internal/models"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
 )
 
 type service struct {

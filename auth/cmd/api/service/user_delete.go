@@ -1,9 +1,9 @@
 package service
 
 import (
-	"auth/interfaces"
-	"auth/internal/models"
 	"fmt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/interfaces"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
 	"log"
 	"strconv"
 )

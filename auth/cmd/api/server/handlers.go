@@ -1,9 +1,9 @@
 package server
 
 import (
-	"auth/cmd/api/service"
-	"auth/cmd/api/service/validate"
-	"auth/shared/response"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/cmd/api/service"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/cmd/api/service/validate"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/shared/response"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"

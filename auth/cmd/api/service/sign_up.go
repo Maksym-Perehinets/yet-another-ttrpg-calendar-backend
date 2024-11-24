@@ -1,16 +1,16 @@
 package service
 
 import (
-	"auth/internal/database"
-	"auth/internal/models"
-	"auth/shared/request"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/database"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/shared/request"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm/utils"
 	"log"
 	"strconv"
 	"time"
 
-	"auth/internal/jwt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/jwt"
 )
 
 // RegisterService registers a user, returns jwt token if successful, error if not

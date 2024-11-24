@@ -1,7 +1,7 @@
 package interfaces
 
 import (
-	"auth/internal/models"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
 	"gorm.io/gorm"
 )
 

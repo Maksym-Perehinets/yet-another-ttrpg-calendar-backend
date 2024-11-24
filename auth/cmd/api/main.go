@@ -1,9 +1,9 @@
 package main
 
 import (
-	"auth/cmd/api/server"
 	"context"
 	"fmt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/cmd/api/server"
 	"log"
 	"net/http"
 	"os/signal"

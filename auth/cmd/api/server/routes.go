@@ -26,7 +26,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 		//r.GET("/logout", s.LogoutHandler)
 	}
 
-	admin := r.Group("/v1/auth/admin")
+	admin := r.Group("/v1/github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/admin")
 	admin.Use(AuthMiddleware("admin"))
 	{
 		admin.GET("/health", s.adminHealthHandler)

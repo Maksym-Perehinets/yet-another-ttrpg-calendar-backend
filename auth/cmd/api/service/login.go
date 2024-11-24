@@ -1,8 +1,8 @@
 package service
 
 import (
-	"auth/cmd/api/service/validate"
-	"auth/interfaces"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/cmd/api/service/validate"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/interfaces"
 	"github.com/gin-gonic/gin"
 	"log"
 	"time"
