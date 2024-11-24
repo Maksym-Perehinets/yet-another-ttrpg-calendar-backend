@@ -1,4 +1,4 @@
-module auth
+module github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth
 
 go 1.23.1
 
