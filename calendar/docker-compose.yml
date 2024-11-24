@@ -1,0 +1,39 @@
+services:
+  calendar:
+    image: cosmtrek/air
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      - PORT=${PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - CALENDAR_DB_HOST=${CALENDAR_DB_HOST}
+      - CALENDAR_DB_PORT=${CALENDAR_DB_PORT}
+      - CALENDAR_DB_DATABASE=${CALENDAR_DB_DATABASE}
+      - CALENDAR_DB_USERNAME=${CALENDAR_DB_USERNAME}
+      - CALENDAR_DB_PASSWORD=${CALENDAR_DB_PASSWORD}
+      - air_wd=/app
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/app
+    depends_on:
+      - psql_calendar
+    profiles:
+      - dev
+
+  psql_calendar:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${CALENDAR_DB_DATABASE}
+      POSTGRES_USER: ${CALENDAR}
+      POSTGRES_PASSWORD: ${CALENDAR_DB_PASSWORD}
+    ports:
+      - "${CALENDAR_DB_PORT}:5432"
+    volumes:
+      - psql_volume_calendar:/var/lib/postgresql/data
+    profiles:
+    - dev
+
+volumes:
+  psql_volume_calendar:
