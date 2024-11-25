@@ -2,8 +2,8 @@ package jwt
 
 import (
 	"errors"
-	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/internal/models"
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/maksym-perehinets/yet-another-ttrpg-calendar-backend/common/internal/models"
 )
 
 func ValidateToken(tokenString string) (*models.Claims, error) {
