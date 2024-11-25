@@ -1,7 +1,7 @@
-package common
+package auth
 
 import (
-	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/internal/jwt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/auth/jwt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
