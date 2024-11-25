@@ -1,4 +1,4 @@
-package server
+package common
 
 import (
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/internal/jwt"
