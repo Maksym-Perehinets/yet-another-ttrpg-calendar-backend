@@ -1,6 +1,7 @@
 package server
 
 import (
+	commonAuth "github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/auth"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -26,13 +27,20 @@ func (s *Server) RegisterRoutes() http.Handler {
 		//r.GET("/logout", s.LogoutHandler)
 	}
 
-	admin := r.Group("/v1/github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/admin")
-	admin.Use(AuthMiddleware("admin"))
+	admin := r.Group("/v1/auth/admin")
+	admin.Use(commonAuth.AuthMiddleware("admin"))
 	{
 		admin.GET("/health", s.adminHealthHandler)
 		admin.GET("/users", s.GetUsersHandler)
 		admin.DELETE("/users/:id", s.DeleteUserHandler)
-		admin.PUT("/change-permission", s.ChangeRoleHandler)
+		admin.POST("/change-permission", s.ChangeRoleHandler)
 	}
+
+	authorized := r.Group("/v1/uthorized")
+	authorized.Use(commonAuth.AuthMiddleware(""))
+	{
+		authorized.PATCH("/users/:id", s.UpdateUserHandler)
+	}
+
 	return r
 }

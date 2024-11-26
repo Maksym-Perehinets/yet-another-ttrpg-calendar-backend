@@ -3,9 +3,9 @@ package validate
 import (
 	"errors"
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/interfaces"
-	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/jwt"
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/models"
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/shared/request"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/auth/jwt"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 	"log"
@@ -28,6 +28,10 @@ func (l *LoginRequest) EmailOrUsername() (string, string, error) {
 		return l.Username, "username", nil
 	}
 
+	if err := validateEmail(l.Email); err != nil {
+		return "", "", err
+	}
+
 	return l.Email, "email", nil
 }
 
@@ -45,6 +49,9 @@ func (l *LoginRequest) ValidatePassword(service interfaces.Service) (*models.Use
 
 	user, err := service.GetUser(f, v)
 	if err != nil {
+		if err.Error() == "record not found" {
+			return nil, errors.New("user not found invalid: " + f)
+		}
 		return nil, err
 	}
 

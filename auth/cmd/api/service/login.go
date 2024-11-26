@@ -15,6 +15,7 @@ func LoginService(s interfaces.Service, c *gin.Context) (string, time.Time, erro
 
 	token, cookieExpiresIn, err := l.GetUserJWT(s)
 	if err != nil {
+		// TODO fix error handling for invalid email
 		log.Printf("Error logging in: %s", err.Error())
 		return "", time.Time{}, err
 	}

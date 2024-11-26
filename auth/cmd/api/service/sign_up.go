@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/internal/jwt"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/auth/jwt"
 )
 
 // RegisterService registers a user, returns jwt token if successful, error if not
@@ -25,9 +25,11 @@ func RegisterService(user *request.RegisterRequest) (string, time.Time, error) {
 	}
 
 	result := db.DB().Create(&models.User{
-		Username: user.Username,
-		Email:    user.Email,
-		Password: string(preparedPassword),
+		Username:       user.Username,
+		Email:          user.Email,
+		Password:       string(preparedPassword),
+		ProfilePicture: user.ProfilePicture,
+		TelegramLink:   user.TelegramLink,
 	}).First(&createdUser)
 	if result.Error != nil {
 		log.Printf("Error inserting user: %v", result.Error)

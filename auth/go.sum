@@ -1,3 +1,7 @@
+github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common v0.0.0-20241125124325-18e062d71f27 h1:uUHyXKpLKBrlVAir2J3hTMcX8CmFA0A87SDg0IZMB0s=
+github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common v0.0.0-20241125124325-18e062d71f27/go.mod h1:/C+DudVhdHLuXTgdlwx9rypXUkZLTKwiv5GBMjaJBys=
+github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common v0.0.0-20241125125427-58fa80afa9e3 h1:DWumWyLKxdlGN76Lr57Y3kdJuTlUeBjXou+/m6kMxxM=
+github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common v0.0.0-20241125125427-58fa80afa9e3/go.mod h1:/C+DudVhdHLuXTgdlwx9rypXUkZLTKwiv5GBMjaJBys=
 github.com/bytedance/sonic v1.12.4 h1:9Csb3c9ZJhfUWeMtpCDCq6BUoH5ogfDFLUgQ/jG+R0k=
 github.com/bytedance/sonic v1.12.4/go.mod h1:B8Gt/XvtZ3Fqj+iSKMypzymZxw/FVwgIGKzMzT9r/rk=
 github.com/bytedance/sonic/loader v0.1.1/go.mod h1:ncP89zfokxS5LZrJxl5z0UJcsk4M4yY2JpfqGeCtNLU=

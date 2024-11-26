@@ -11,22 +11,14 @@ import (
 	"regexp"
 )
 
-var (
-	emailRegex = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
-)
-
 type RegisterRequest struct {
 	request.RegisterRequest
 }
 
 func (r *RegisterRequest) ValidateEmail(service interfaces.Service) error {
 	log.Printf("Validating email: %s", r.Email)
-	matched, err := regexp.MatchString(emailRegex, r.Email)
-	if err != nil {
+	if err := validateEmail(r.Email); err != nil {
 		return err
-	}
-	if !matched {
-		return fmt.Errorf("invalid email format")
 	}
 
 	if err := service.AlreadyExists("email", r.Email, models.User{}); err != nil {

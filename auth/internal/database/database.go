@@ -116,6 +116,9 @@ func (s *service) GetUser(c string, v string) (*models.User, error) {
 	var user models.User
 	result := s.db.Model(&models.User{}).Where(fmt.Sprintf("%s = ?", c), v).First(&user)
 	if result.Error != nil {
+		if result.Error.Error() == "record not found" {
+			return nil, fmt.Errorf("record not found")
+		}
 		log.Printf("Error querying database: %v", result.Error)
 		return nil, fmt.Errorf("internal server error")
 	}
