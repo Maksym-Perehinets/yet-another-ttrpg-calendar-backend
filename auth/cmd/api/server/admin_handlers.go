@@ -53,7 +53,7 @@ func (s *Server) ChangeRoleHandler(c *gin.Context) {
 		return
 	}
 
-	id, err := service.ChangeRoleService(s.db, c.Query("id"), c.Query("role"))
+	id, err := service.ChangeRoleService(s.db, c.Param("id"), c.Query("role"))
 	if err != nil {
 		log.Printf("Error changing user role: %s", err.Error())
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
