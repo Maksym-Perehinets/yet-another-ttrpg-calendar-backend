@@ -1,0 +1,71 @@
+services:
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    environment:
+      - PORT=${PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - AUTH_DB_HOST=${AUTH_DB_HOST}
+      - AUTH_DB_PORT=${AUTH_DB_PORT}
+      - AUTH_DB_DATABASE=${AUTH_DB_DATABASE}
+      - AUTH_DB_USERNAME=${AUTH_DB_USERNAME}
+      - AUTH_DB_PASSWORD=${AUTH_DB_PASSWORD}
+    ports:
+      - "${AUTH_PORT}:${AUTH_PORT}"
+    depends_on:
+      - db_auth
+    profiles:
+      - prod
+
+  calendar:
+    build:
+        context: ./calendar
+        dockerfile: Dockerfile
+    environment:
+    - PORT=${PORT}
+    - JWT_SECRET=${JWT_SECRET}
+    - CALENDAR_DB_HOST=${CALENDAR_DB_HOST}
+    - CALENDAR_DB_PORT=${CALENDAR_DB_PORT}
+    - CALENDAR_DB_DATABASE=${CALENDAR_DB_DATABASE}
+    - CALENDAR_DB_USERNAME=${CALENDAR_DB_USERNAME}
+    - CALENDAR_DB_PASSWORD=${CALENDAR_DB_PASSWORD}
+    ports:
+    - "${CALENDAR_PORT}:${CALENDAR_PORT}"
+    depends_on:
+    - db_calendar
+    profiles:
+    - prod
+
+# Database services
+  db_auth:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${AUTH_DB_DATABASE}
+      POSTGRES_USER: ${AUTH_DB_USERNAME}
+      POSTGRES_PASSWORD: ${AUTH_DB_PASSWORD}
+    ports:
+      - "${AUTH_DB_PORT}:5432"
+    volumes:
+      - psql_volume_auth:/var/lib/postgresql/data
+    profiles:
+      - prod
+
+  psql_calendar:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${CALENDAR_DB_DATABASE}
+      POSTGRES_USER: ${CALENDAR}
+      POSTGRES_PASSWORD: ${CALENDAR_DB_PASSWORD}
+    ports:
+      - "${CALENDAR_DB_PORT}:5432"
+    volumes:
+      - psql_volume_calendar:/var/lib/postgresql/data
+    profiles:
+      - dev
+
+volumes:
+  psql_volume_calendar:
+  psql_volume_auth:
