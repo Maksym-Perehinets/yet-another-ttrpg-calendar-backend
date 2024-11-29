@@ -1,7 +1,7 @@
 package server
 
 import (
-	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/auth/cmd/api/server"
+	commonAuth "github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/auth"
 	"net/http"
 
 	"github.com/gin-contrib/cors"
@@ -21,19 +21,28 @@ func (s *Server) RegisterRoutes() http.Handler {
 	cal := r.Group("/v1/calendar")
 	{
 		cal.GET("/", s.HelloWorldHandler)
-		//cal.GET("/health", s.healthHandler)
+
+		// Locations
+		cal.GET("/locations", s.GetLocationsHandler)
+		cal.GET("/location/:id", s.GetLocationHandler)
+
 	}
 
 	users := r.Group("/v1/calendar/authn")
-	users.Use(server.AuthMiddleware(""))
+	users.Use(commonAuth.AuthMiddleware(""))
 	{
 		users.GET("/", s.HelloWorldHandler)
 	}
 
 	admin := r.Group("/v1/calendar/admin")
-	admin.Use(server.AuthMiddleware("admin"))
+	admin.Use(commonAuth.AuthMiddleware("admin"))
 	{
-		admin.GET("/health", s.HelloWorldHandler)
+		admin.GET("/health", s.adminHealthHandler)
+
+		// Locations
+		admin.POST("/create-location", s.CreateLocationHandler)
+		admin.DELETE("/location/:id", s.DeleteLocationHandler)
+		admin.POST("/location/update/:id", s.UpdateLocationHandler)
 	}
 
 	return r

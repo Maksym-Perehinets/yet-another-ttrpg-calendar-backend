@@ -1,13 +1,15 @@
 package models
 
 type Locations struct {
-	ID          uint    `json:"id" gorm:"primaryKey"`
-	Name        string  `json:"name" gorm:"not null"`
-	Description string  `json:"description"`
-	City        string  `json:"city" gorm:"not null"`
-	Street      string  `json:"street" gorm:"not null"`
-	LinkToSite  string  `json:"link_to_site" gorm:"not null"`
-	Price       uint    `json:"price" gorm:"not null"`
-	PricingType string  `json:"pricing_type" gorm:"not null"`
-	Games       []Games `json:"games" gorm:"foreignKey:LocationID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	ID          uint    `gorm:"primaryKey"`
+	Name        string  `gorm:"not null"`
+	Description string  `gorm:"not null"`
+	City        string  `gorm:"not null"`
+	Street      string  `gorm:"not null; unique"`
+	LinkToSite  string  `gorm:"not null"`
+	Price       float64 `gorm:"not null"`
+	PricingType string  `gorm:"not null"`
+	OpenAt      string  `gorm:"not null"`
+	CloseAt     string  `gorm:"not null"`
+	Games       []Games `gorm:"foreignKey:LocationID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 }

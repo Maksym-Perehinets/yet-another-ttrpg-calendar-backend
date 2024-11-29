@@ -13,4 +13,7 @@ type Service interface {
 
 	// DB exposes the GORM DB instance for application use.
 	DB() *gorm.DB
+
+	// Locations all interactions with locations table form db encapsulated here
+	Locations
 }

@@ -3,14 +3,13 @@ package server
 import (
 	"fmt"
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/internal/database"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/internal/interfaces"
 	"net/http"
 	"os"
 	"strconv"
 	"time"
 
 	_ "github.com/joho/godotenv/autoload"
-
-	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/interfaces"
 )
 
 type Server struct {

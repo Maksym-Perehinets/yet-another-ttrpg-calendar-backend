@@ -2,7 +2,7 @@ package database
 
 import (
 	"fmt"
-	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/interfaces"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/internal/interfaces"
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/internal/models"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	_ "github.com/joho/godotenv/autoload"
@@ -116,3 +116,16 @@ func (s *service) DB() *gorm.DB {
 	log.Printf("Returning GORM DB instance for application use")
 	return s.db
 }
+
+// ElementExists checks if an element exists in the database with same fields.
+//func (s *service) ElementExists(fields map[string]interface{}, model interface{}) bool {
+//	var count int64
+//
+//	rs := s.db.Model(model).Where(fields).Count(&count)
+//	if rs.Error != nil {
+//		log.Printf("Error while checking if element exists: %v", rs.Error)
+//		return false
+//	}
+//
+//	return count == 0
+//}
