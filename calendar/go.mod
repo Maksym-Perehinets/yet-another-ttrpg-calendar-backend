@@ -3,7 +3,7 @@ module github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar
 go 1.23.1
 
 require (
-	github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common v0.0.0-20241127191855-374589389e6a
+	github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common v0.0.0-20241129231405-e1f9e52e5876
 	github.com/gin-contrib/cors v1.7.2
 	github.com/gin-gonic/gin v1.10.0
 	github.com/jackc/pgx/v5 v5.7.1

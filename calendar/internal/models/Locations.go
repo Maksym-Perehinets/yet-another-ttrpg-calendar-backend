@@ -13,3 +13,7 @@ type Locations struct {
 	CloseAt     string  `gorm:"not null"`
 	Games       []Games `gorm:"foreignKey:LocationID;constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 }
+
+func (l *Locations) GetID() uint {
+	return l.ID
+}

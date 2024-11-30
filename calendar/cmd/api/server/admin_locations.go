@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/internal/models"
 	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/calendar/shared/request"
+	"github.com/Maksym-Perehinets/yet-another-ttrpg-calendar-backend/common/requests"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -60,7 +61,7 @@ func (s *Server) DeleteLocationHandler(c *gin.Context) {
 }
 
 func (s *Server) UpdateLocationHandler(c *gin.Context) {
-	var location request.Update
+	var location requests.Update
 
 	if err := c.BindJSON(&location); err != nil {
 		log.Printf("Error binding location: %s", err.Error())

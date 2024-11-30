@@ -15,7 +15,7 @@ func (s *Server) RegisterRoutes() http.Handler {
 		AllowOrigins:     []string{"http://localhost:5173"}, // Add your frontend URL
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"},
 		AllowHeaders:     []string{"Accept", "Authorization", "Content-Type"},
-		AllowCredentials: true, // Enable cookies/auth
+		AllowCredentials: true,
 	}))
 
 	cal := r.Group("/v1/calendar")
@@ -25,7 +25,6 @@ func (s *Server) RegisterRoutes() http.Handler {
 		// Locations
 		cal.GET("/locations", s.GetLocationsHandler)
 		cal.GET("/location/:id", s.GetLocationHandler)
-
 	}
 
 	users := r.Group("/v1/calendar/authn")
@@ -40,9 +39,9 @@ func (s *Server) RegisterRoutes() http.Handler {
 		admin.GET("/health", s.adminHealthHandler)
 
 		// Locations
-		admin.POST("/create-location", s.CreateLocationHandler)
+		admin.POST("/location", s.CreateLocationHandler)
 		admin.DELETE("/location/:id", s.DeleteLocationHandler)
-		admin.POST("/location/update/:id", s.UpdateLocationHandler)
+		admin.PATCH("/location/:id", s.UpdateLocationHandler)
 	}
 
 	return r
