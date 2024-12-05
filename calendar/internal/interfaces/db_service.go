@@ -16,4 +16,7 @@ type Service interface {
 
 	// Locations all interactions with locations table form db encapsulated here
 	Locations
+
+	// TTRPGSystems all interactions with ttrpg_systems table form db encapsulated here
+	TTRPGSystems
 }

@@ -25,6 +25,10 @@ func (s *Server) RegisterRoutes() http.Handler {
 		// Locations
 		cal.GET("/locations", s.GetLocationsHandler)
 		cal.GET("/location/:id", s.GetLocationHandler)
+
+		// Systems
+		cal.GET("/systems", s.GetSystemsHandler)
+		//cal.GET("/system/:id", s.GetSystemHandler)
 	}
 
 	users := r.Group("/v1/calendar/authn")
@@ -42,6 +46,11 @@ func (s *Server) RegisterRoutes() http.Handler {
 		admin.POST("/location", s.CreateLocationHandler)
 		admin.DELETE("/location/:id", s.DeleteLocationHandler)
 		admin.PATCH("/location/:id", s.UpdateLocationHandler)
+
+		// Systems
+		admin.POST("/ttrpg-system", s.CreateSystemHandler)
+		//admin.DELETE("/system/:id", s.DeleteSystemHandler)
+		//admin.PATCH("/system/:id", s.UpdateSystemHandler)
 	}
 
 	return r

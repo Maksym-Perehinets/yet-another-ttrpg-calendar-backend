@@ -8,34 +8,6 @@ import (
 	"strconv"
 )
 
-func (s *Server) GetLocationsHandler(c *gin.Context) {
-	log.Printf("Request to get locations from %s", c.ClientIP())
-	if c.Query("page") == "" || c.Query("limit") == "" {
-		c.JSON(400, "Both page and limit are required")
-		return
-	}
-
-	page, err := strconv.Atoi(c.Query("page"))
-	if err != nil {
-		c.JSON(400, "Invalid page")
-		return
-	}
-
-	limit, err := strconv.Atoi(c.Query("limit"))
-	if err != nil {
-		c.JSON(400, "Invalid page")
-		return
-	}
-
-	data, err := services.GetLocationsService(s.db, page, limit)
-	if err != nil {
-		c.JSON(500, err)
-		return
-	}
-
-	c.JSON(200, data)
-}
-
 func (s *Server) GetLocationHandler(c *gin.Context) {
 	log.Printf("Request to get location from %s", c.ClientIP())
 	if c.Param("id") == "" {
@@ -58,4 +30,61 @@ func (s *Server) GetLocationHandler(c *gin.Context) {
 	response := transformers.ToLocationResponse(data)
 
 	c.JSON(200, response)
+}
+
+func (s *Server) GetLocationsHandler(c *gin.Context) {
+	log.Printf("Request to get locations from %s", c.ClientIP())
+	if c.Query("page") == "" || c.Query("limit") == "" {
+		c.JSON(400, gin.H{"error": "Both page and limit are required"})
+		return
+	}
+
+	page, err := strconv.Atoi(c.Query("page"))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid page"})
+		return
+	}
+
+	limit, err := strconv.Atoi(c.Query("limit"))
+	if err != nil {
+		c.JSON(400, gin.H{"error": "Invalid amount of elements per page"})
+		return
+	}
+
+	data, err := services.GetLocationsService(s.db, page, limit)
+	if err != nil {
+		c.JSON(500, err)
+		return
+	}
+
+	c.JSON(200, data)
+}
+
+func (s *Server) GetSystemsHandler(c *gin.Context) {
+	//log.Printf("Request to get systems from %s", c.ClientIP())
+	//if c.Query("page") == "" || c.Query("limit") == "" {
+	//	c.JSON(400, gin.H{"error": "Both page and limit are required"})
+	//	return
+	//}
+	//
+	//page, err := strconv.Atoi(c.Query("page"))
+	//if err != nil {
+	//	c.JSON(400, gin.H{"error": "Invalid page"})
+	//	return
+	//}
+	//
+	//limit, err := strconv.Atoi(c.Query("limit"))
+	//if err != nil {
+	//	c.JSON(400, gin.H{"error": "Invalid amount of elements per page"})
+	//	return
+	//}
+	//
+	//data, err := services.GetSystemsService(s.db, page, limit)
+	//if err != nil {
+	//	c.JSON(500, err)
+	//	return
+	//}
+	//
+	//c.JSON(200, data)
+
 }
