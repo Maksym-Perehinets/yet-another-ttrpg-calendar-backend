@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "18490934-7519-4df5-a73a-505720e291c8",
+		"name": "YTTR",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "40108849"
+	},
+	"item": [
+		{
+			"name": "calendar",
+			"item": [
+				{
+					"name": "locations",
+					"item": [
+						{
+							"name": "create-location",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"Central Park\",\n    \"description\": \"A large public park in New York City.\",\n    \"city\": \"New York\",\n    \"street\": \"Tesst\",\n    \"link_to_site\": \"https://www.centralparknyc.org/\",\n    \"price\": 50,\n    \"pricing_type\": \"per hour\",\n    \"open_at\": \"08:00 AM\",\n    \"close_at\": \"10:00 PM\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/calendar/admin/location",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"calendar",
+										"admin",
+										"location"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "locations",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[{\n \"field\": \"city\",\n \"value\": \"Lviv\"\n}]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/calendar/admin/location/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"calendar",
+										"admin",
+										"location",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "location",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/calendar/location/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"calendar",
+										"location",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Id of record in db"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "locations",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/calendar/locations?page=1&limit=10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"calendar",
+										"locations"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "location",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/v1/calendar/admin/location/:id",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"calendar",
+										"admin",
+										"location",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "Id of record in db"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "locations endpoint for managment of all possible locations where a game can take a place"
+				},
+				{
+					"name": "TTRPG_system",
+					"item": [
+						{
+							"name": "create-system",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Dungeons & Dragons\",\n  \"genre\": \"High Fantasy\",\n  \"description\": \"A popular tabletop role-playing game where players embark on adventures in a fantasy world.\",\n  \"link_to_site\": \"https://dnd.wizards.com\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/v1/calendar/admin/ttrpg-system",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"v1",
+										"calendar",
+										"admin",
+										"ttrpg-system"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"description": "Part of app that allows to manage and plan games in real time"
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			],
+			"description": "Issue jwt token inside cookie that letter is validated by middleware"
+		}
+	],
+	"auth": {
+		"type": "jwt",
+		"jwt": [
+			{
+				"key": "payload",
+				"value": "{\n    \"id\": \"1\",\n    \"username\": \"postman\",\n    \"role\": \"admin\"\n}",
+				"type": "string"
+			},
+			{
+				"key": "secret",
+				"value": "7hL5ZwmE9JY1q5cNMeiR0fDNeghfpB3RdI2dKRfQT8bwEl1C1iMh2fDFpmrOkJsQdz3TO/qV2/+9+Ay+nDPwuQ==",
+				"type": "string"
+			},
+			{
+				"key": "isSecretBase64Encoded",
+				"value": false,
+				"type": "boolean"
+			},
+			{
+				"key": "algorithm",
+				"value": "HS512",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "headerPrefix",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "queryParamKey",
+				"value": "token",
+				"type": "string"
+			},
+			{
+				"key": "header",
+				"value": "{}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
