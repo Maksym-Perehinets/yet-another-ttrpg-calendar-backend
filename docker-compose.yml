@@ -4,7 +4,7 @@ services:
       context: ./auth
       dockerfile: Dockerfile
     environment:
-      - PORT=${PORT}
+      - PORT=${AUTH_PORT}
       - JWT_SECRET=${JWT_SECRET}
       - AUTH_DB_HOST=${AUTH_DB_HOST}
       - AUTH_DB_PORT=${AUTH_DB_PORT}
@@ -23,7 +23,7 @@ services:
         context: ./calendar
         dockerfile: Dockerfile
     environment:
-    - PORT=${PORT}
+    - PORT=${CALENDAR_PORT}
     - JWT_SECRET=${JWT_SECRET}
     - CALENDAR_DB_HOST=${CALENDAR_DB_HOST}
     - CALENDAR_DB_PORT=${CALENDAR_DB_PORT}
@@ -57,7 +57,7 @@ services:
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${CALENDAR_DB_DATABASE}
-      POSTGRES_USER: ${CALENDAR}
+      POSTGRES_USER: ${CALENDAR_DB_USERNAME}
       POSTGRES_PASSWORD: ${CALENDAR_DB_PASSWORD}
     ports:
       - "${CALENDAR_DB_PORT}:5432"
