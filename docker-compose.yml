@@ -1,3 +1,5 @@
+version: "3.9"
+
 services:
   auth:
     build:
@@ -7,7 +9,7 @@ services:
       - PORT=${AUTH_PORT}
       - JWT_SECRET=${JWT_SECRET}
       - AUTH_DB_HOST=${AUTH_DB_HOST}
-      - AUTH_DB_PORT=${AUTH_DB_PORT}
+      - AUTH_DB_PORT=5432
       - AUTH_DB_DATABASE=${AUTH_DB_DATABASE}
       - AUTH_DB_USERNAME=${AUTH_DB_USERNAME}
       - AUTH_DB_PASSWORD=${AUTH_DB_PASSWORD}
@@ -15,29 +17,32 @@ services:
       - "${AUTH_PORT}:${AUTH_PORT}"
     depends_on:
       - db_auth
+    networks:
+      - auth_network
     profiles:
       - prod
 
   calendar:
     build:
-        context: ./calendar
-        dockerfile: Dockerfile
+      context: ./calendar
+      dockerfile: Dockerfile
     environment:
-    - PORT=${CALENDAR_PORT}
-    - JWT_SECRET=${JWT_SECRET}
-    - CALENDAR_DB_HOST=${CALENDAR_DB_HOST}
-    - CALENDAR_DB_PORT=${CALENDAR_DB_PORT}
-    - CALENDAR_DB_DATABASE=${CALENDAR_DB_DATABASE}
-    - CALENDAR_DB_USERNAME=${CALENDAR_DB_USERNAME}
-    - CALENDAR_DB_PASSWORD=${CALENDAR_DB_PASSWORD}
+      - PORT=${CALENDAR_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - CALENDAR_DB_HOST=${CALENDAR_DB_HOST}
+      - CALENDAR_DB_PORT=${CALENDAR_DB_PORT}
+      - CALENDAR_DB_DATABASE=${CALENDAR_DB_DATABASE}
+      - CALENDAR_DB_USERNAME=${CALENDAR_DB_USERNAME}
+      - CALENDAR_DB_PASSWORD=${CALENDAR_DB_PASSWORD}
     ports:
-    - "${CALENDAR_PORT}:${CALENDAR_PORT}"
+      - "${CALENDAR_PORT}:${CALENDAR_PORT}"
     depends_on:
-    - db_calendar
+      - db_calendar
+    networks:
+      - calendar_network
     profiles:
-    - prod
+      - prod
 
-# Database services
   db_auth:
     image: postgres:latest
     restart: unless-stopped
@@ -49,10 +54,12 @@ services:
       - "${AUTH_DB_PORT}:5432"
     volumes:
       - psql_volume_auth:/var/lib/postgresql/data
+    networks:
+      - auth_network
     profiles:
       - prod
 
-  psql_calendar:
+  db_calendar:
     image: postgres:latest
     restart: unless-stopped
     environment:
@@ -63,9 +70,18 @@ services:
       - "${CALENDAR_DB_PORT}:5432"
     volumes:
       - psql_volume_calendar:/var/lib/postgresql/data
+    networks:
+      - calendar_network
     profiles:
+      - prod
       - dev
 
 volumes:
   psql_volume_calendar:
   psql_volume_auth:
+
+networks:
+  auth_network:
+    driver: bridge
+  calendar_network:
+    driver: bridge
